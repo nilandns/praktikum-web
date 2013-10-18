@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+	background-color:#3CC;
+}
+h2
+{
+	font-family:Tahoma, Geneva, sans-serif;
+	color:#303;
+	font-size:30px;
+}
+*
+{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#300;
+}
