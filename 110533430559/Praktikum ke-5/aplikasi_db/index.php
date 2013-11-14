@@ -12,7 +12,8 @@
 
 <body>
 <?php
-	ini_set('display_errors', 1);
+	define('display_errors', 1);
+	require_once("auth.php");
 	
 	//meng- include file koneksi dan data handler
 	require_once './koneksi.php';

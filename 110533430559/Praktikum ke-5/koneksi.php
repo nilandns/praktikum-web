@@ -5,12 +5,14 @@
 	$host = 'localhost';	//karena memakai server lokal->lihat phpmyadmin->privillege
 	$user = 'root';
 	$pass = 'serverweb';
-	$db   = 'mysql';
+	$db   = 'myweb';
 	
 	$cnn = mysql_connect($host, $user, $pass);
 	if(!$cnn)
 	{
 		exit('Koneksi Gagal');
+	}else{
+		echo 'Koneksi Berhasil';	
 	}
 	$db = mysql_select_db($db);
 	if(!$db)

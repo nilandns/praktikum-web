@@ -46,23 +46,37 @@
 						}
 						break;
 					case 'del':
-						if(isset($_GET['id']) && ctype_digit($_GET['id']))
+					?>
+                    <script type="text/javascript">
+						var dlt=confirm("Hapus Data dengan id <?php echo $_GET['id']; ?>");
+						if(dlt!=true)
 						{
-							//key untuk menghapus data
-							$id = $_GET['id'];
-							//lengkapi pernyataan SQL hapus data
-							$sql = 'DELETE FROM'.MHS.'WHERE id='.$id;
-							$res = mysql_query($sql);
-							if($res)
-							{ 
-								//lengkapi script untuk redireksi ke root
-								data_editor($root);
-							}else{
-								echo 'gagal menghapus data';
-							}
+							document.location.href="index.php";
+							alert(dlt);
 						}else{
-							show_admin_data($root);
+							//alert(dlt)
+							<?php
+								if(isset($_GET['id']) && ctype_digit($_GET['id']))
+								{
+									//key untuk menghapus data
+									$id = $_GET['id'];
+									//lengkapi pernyataan SQL hapus data
+									$sql = 'DELETE FROM'.MHS.'WHERE nim='.$id;
+									$res = mysql_query($sql);
+									if($res)
+									{ 
+										//lengkapi script untuk redireksi ke root
+										data_editor($root);
+									}else{
+										echo 'gagal menghapus data';
+									}
+								}else{
+									show_admin_data($root);
+								}				
+							?>
 						}
+					</script>	
+                    <?php
 						break;
 					default:
 						show_admin_data($root);
@@ -85,6 +99,7 @@
 	{
 ?>
 		<h2 class="heading">Administrasi Data</h2>
+        <a href="?m=logout">logout</a>
 <?php
 		$sql = 'SELECT nim, nama, alamat FROM '.MHS;
 		$res = mysql_query($sql);
@@ -200,6 +215,10 @@
 			if(!$id)
 			{
 				//lengkapi pernyataan php sql untuk insert data
+				$nim	=$_POST['nim'];
+				$nama	=$_POST['nama'];
+				$alamat	=$_POST['alamat'];
+				$sql	="INSERT INTO mahasiswa VALUES('".$nim."', '".$nama."', '".$alamat."')";
 				$res = mysql_query($sql);
 				if($res)
 				{
@@ -212,13 +231,18 @@
 					echo 'gagal menambah data';
 				}
 			}else{
+				$nim	=$_POST['nim'];
+				$nama	=$_POST['nama'];
+				$alamat	=$_POST['alamat'];
+				$sql	="UPDATE mahasiswa SET nim='".$nim."', nama='".$nama."', alamat='".$alamat."' WHERE nim='".$id."'";
 				//lengkapi pernyataan php sql untuk update data
 				$res=mysql_query($sql);
 				if($res)
 				{
-					//lengkapi script untuk redireksi ke root
 ?>
-					
+					<script type="text/javascript">
+						document.location.href="<?php echo $root; ?>";
+					</script>
 <?php
 				}else{
 					echo 'Gagal memodifikasi';
@@ -276,6 +300,7 @@
             </form>
 <?php
 		}
+		return false;
 	}
 ?>
 </body>

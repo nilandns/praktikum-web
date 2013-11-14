@@ -5,7 +5,7 @@
 	$host = 'localhost';	//karena memakai server lokal->lihat phpmyadmin->privillege
 	$user = 'root';
 	$pass = 'serverweb';
-	$db   = 'mysql';
+	$db   = 'myweb';
 	
 	$cnn = mysql_connect($host, $user, $pass);
 	if(!$cnn)
